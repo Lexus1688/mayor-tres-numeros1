@@ -1,24 +1,46 @@
 """
 Determina el mayor de tres números ingresados por el teclado
 """
-def intercambiar_valores(numero1, numero2):
-    temporal = numero1
-    numero1 = numero2
-    numero2 = temporal
-    return numero1, numero2
+class OrdenarTresNumeros:
+    def __init__(self, numero1=0, numero2=0, numero3=0):
+        self.numero1 = numero1
+        self.numero2 = numero2
+        self.numero3 = numero3
 
-numero1=int(input("Ingresa el primer numero : "))
-numero2=int(input("Ingresa el segundo numero: "))
-numero3=int(input("Ingresa el tercer numero : "))
+    def intercambiar_valores(self, numero1, numero2):
+        temporal = numero1
+        numero1 = numero2
+        numero2 = temporal
+        return numero1, numero2
 
-if numero1>numero2:
-   numero1, numero2 = intercambiar_valores(numero1, numero2)
+    def ingresar_numeros(self):
+        self.numero1 = int(input("Ingresa el primer número: "))
+        self.numero2 = int(input("Ingresa el segundo número: "))
+        self.numero3 = int(input("Ingresa el tercer número: "))
 
-if numero2>numero3:
-    numero2, numero3 = intercambiar_valores(numero2, numero3)
+    def ordenar_numeros(self):
+        if self.numero1 > self.numero2:
+            self.numero1, self.numero2 = self.intercambiar_valores(self.numero1, self.numero2)
 
-if numero1>numero2:
-   numero1, numero2 = intercambiar_valores(numero1, numero2)
+        if self.numero2 > self.numero3:
+            self.numero2, self.numero3 = self.intercambiar_valores(self.numero2, self.numero3)
 
-print(f"numero ordenados: {numero1}, {numero2}, {numero3}")
-print(f"El mayor es {numero3}")
+        if self.numero1 > self.numero2:
+            self.numero1, self.numero2 = self.intercambiar_valores(self.numero1, self.numero2)
+
+    def imprimir_numeros(self):
+        print(f"{self.numero1}, {self.numero2}, {self.numero3}")
+
+
+if __name__ == "__main__":
+    numeros = OrdenarTresNumeros()
+    numeros.ingresar_numeros()
+
+    print("\nNúmeros desordenados:")
+    numeros.imprimir_numeros()
+
+    print("\nNúmeros ordenados:")
+    numeros.ordenar_numeros()
+    numeros.imprimir_numeros()
+
+    print("\nEl mayor es:", numeros.numero3)
